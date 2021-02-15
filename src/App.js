@@ -1,23 +1,33 @@
-import React, { component } from 'react';
-import NavBar from './componentes/NavBar';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
-import Index from './componentes/Index';
-import './App.css';
-import { ContextController } from './Context';
+import React from "react";
+import NavBar from "./components/NavBar";
+import { BrowserRouter, Switch, Route } from "react-router-dom";
+import "./dist/styles.css";
+import { ContextController } from "./Context";
+import ItemDetailContainer from "./components/ItemDetailContainer";
+import SearchResults from "./components/SearchResults";
+import Index from "./components/Index";
 
 function App() {
   return (
     <ContextController>
-    <Router>
-      <>
-      <NavBar/>
-      <div className="container">
-        <Switch>
-          <Route exact path="/" component={Index} />
-        </Switch>
-      </div>
-      </>
-    </Router>
+      <BrowserRouter>
+        <header>
+          <NavBar />
+        </header>
+        <section className="section">
+          <Switch>
+            <Route exact path="/">
+              <Index />
+            </Route>
+            <Route exact path="/items">
+              <SearchResults />
+            </Route>
+            <Route exact path="/item/:id">
+              <ItemDetailContainer />
+            </Route>
+          </Switch>
+        </section>
+      </BrowserRouter>
     </ContextController>
   );
 }
